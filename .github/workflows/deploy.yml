@@ -24,10 +24,11 @@ jobs:
       - run: npx playwright install --with-deps
       - run: npm run test:e2e
       - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
         with:
           path: dist
   deploy:
-    if: github.ref == 'refs/head/main'
+    if: github.ref == 'refs/heads/main'
     needs: verify
     runs-on: ubuntu-latest
     permissions:
