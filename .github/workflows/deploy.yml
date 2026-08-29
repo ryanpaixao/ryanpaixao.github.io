@@ -21,7 +21,7 @@ jobs:
       - run: npm run type-check
       - run: npm run test:unit
       - run: npm run build
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps
       - run: npm run test:e2e
       - uses: actions/upload-pages-artifact@v3
         with:
