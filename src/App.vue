@@ -6,7 +6,7 @@ import UnderConstructionWelcome from './components/UnderConstructionWelcome.vue'
 <template>
   <header>
     <div class="wrapper">
-      <UnderConstructionWelcome msg="Pardon the dust." />
+      <UnderConstructionWelcome msg="Pardon our dust." />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
