@@ -1,4 +1,5 @@
 import type { Project, ProjectTag } from '@/types/project'
+import { sortByDateDesc, collectTags } from '@/lib/projects'
 
 export const projects = [
   {
@@ -68,15 +69,13 @@ export const projects = [
 // Union of valid slugs, e.g. 'i-have-notions' | 'productivity-dashboard' | ...
 export type ProjectSlug = (typeof projects)[number]['slug']
 
-// Newest first (YYYY-MM)
-export const projectsByDate: readonly Project[] = [...projects].sort((a, b) =>
-  b.date.localeCompare(a.date),
-)
+// // Newest first (YYYY-MM)
+export const projectsByDate: readonly Project[] = sortByDateDesc(projects)
 
-export const featuredProjects = projectsByDate.filter((p) => p.featured)
+export const featuredProjects: readonly Project[] = projectsByDate.filter((p) => p.featured)
 
 // Every tag in use, deduped and alphabetised. Drives filter UI
-export const allTags = [...new Set(projects.flatMap((p) => p.tags))].sort()
+export const allTags: readonly ProjectTag[] = collectTags(projects)
 
 /**
  * Narrows untrusted string to a ProjectTag. Use this at the boundary --
@@ -85,12 +84,4 @@ export const allTags = [...new Set(projects.flatMap((p) => p.tags))].sort()
  */
 export function isProjectTag(value: string): value is ProjectTag {
   return (allTags as readonly string[]).includes(value)
-}
-
-export function getProjectBySlug(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug)
-}
-
-export function getProjectsByTag(tag: ProjectTag): readonly Project[] {
-  return projectsByDate.filter((p) => p.tags.includes(tag))
 }
