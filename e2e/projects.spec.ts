@@ -14,6 +14,9 @@ test.describe('home page', () => {
 
     const firstCard = page.getByRole('article').first()
 
-    await expect(firstCard.getByRole('link')).toHaveAttribute('href', /VprojectsV/)
+    await expect(firstCard.getByRole('link', { name: 'I Have Notions' })).toHaveAttribute(
+      'href',
+      /\/project\/i-have-notions/,
+    )
   })
 })
