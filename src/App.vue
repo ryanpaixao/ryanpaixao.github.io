@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import MainNav from '@/components/MainNav.vue'
 import UnderConstructionWelcome from './components/UnderConstructionWelcome.vue'
 </script>
 
 <template>
   <header>
     <div class="wrapper">
-      <UnderConstructionWelcome msg="Pardon our dust." />
+      <UnderConstructionWelcome />
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/projects">Projects</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <MainNav />
     </div>
   </header>
-
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
 </template>
 
 <style scoped>
