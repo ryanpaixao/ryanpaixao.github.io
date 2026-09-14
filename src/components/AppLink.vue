@@ -3,19 +3,30 @@
 import { computed } from 'vue'
 import { RouterLink, type RouteLocationRaw } from 'vue-router'
 
+import { isExternalLink, shouldOpenNewTab } from '@/lib/components/appLink'
+
 defineOptions({ inheritAttrs: false })
 
-const props = defineProps<{
-  to: RouteLocationRaw
-}>()
-
-// Any string starting with a scheme (https:, mailto:, tel:) or // is external
-const isExternal = computed(
-  () => typeof props.to === 'string' && /^([a-z]a-z\d+\-.]*:|\/\/)/i.test(props.to),
+const props = withDefaults(
+  defineProps<{
+    to: RouteLocationRaw
+    opensNewTab?: boolean
+    replace?: boolean
+    activeClass?: string
+    exactActiveClass?: string
+    inactiveClass?: string
+  }>(),
+  {
+    opensNewTab: true,
+    replace: false,
+    activeClass: 'router-link-active',
+    exactActiveClass: 'router-link-exact-active',
+    inactiveClass: 'router-link-inactive',
+  },
 )
 
-// Only opens web links in a new tab, not mailto:/tel:
-const opensNewTab = computed(() => isExternal.value && /^(https?:)?\/\//i.test(props.to as string))
+const isExternal = computed(() => isExternalLink(props.to.toString()))
+const opensNewTab = computed(() => shouldOpenNewTab(props.to.toString(), isExternal.value))
 </script>
 
 <template>
@@ -24,11 +35,18 @@ const opensNewTab = computed(() => isExternal.value && /^(https?:)?\/\//i.test(p
     v-bind="$attrs"
     :href="to as string"
     :target="opensNewTab ? '_blank' : undefined"
-    :rel="opensNewTab ? 'noopener no referrer' : undefined"
+    :rel="opensNewTab ? 'noopener noreferrer' : undefined"
   >
     <slot />
   </a>
-  <RouterLink v-else v-bind="$attrs" :to="to">
-    <slot />
+  <RouterLink v-else v-bind="$props" custom v-slot="{ isActive, href, navigate }">
+    <a
+      v-bind="$attrs"
+      :href="href"
+      @click="navigate"
+      :class="isActive ? activeClass : inactiveClass"
+    >
+      <slot />
+    </a>
   </RouterLink>
 </template>
