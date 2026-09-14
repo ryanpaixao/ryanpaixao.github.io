@@ -27,6 +27,6 @@ const projectPath = `/project/${slug}`
     <p>Retrospective: {{ retrospective }}</p>
     <hr />
     <p>Date: {{ date }}</p>
-    <AppLink class="bg-sky-500 hover:bg-sky-700" :to="repoUrl"> Github Repo </AppLink>
+    <AppLink class="bg-sky-500 hover:bg-sky-700" :to="repoUrl"> View repository </AppLink>
   </article>
 </template>
