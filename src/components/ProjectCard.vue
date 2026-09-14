@@ -8,7 +8,7 @@ interface Props {
 
 const props = defineProps<Props>()
 const { approach, date, problem, repoUrl, retrospective, slug, summary, title } = props.projectInfo
-const projectPath = `/projects /${slug}`
+const projectPath = `/projects/${slug}`
 </script>
 
 <template>
