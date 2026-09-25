@@ -33,3 +33,15 @@ test('every project links to a real repository', async ({ page }) => {
   const hrefs = await links.evaluateAll((els) => els.map((e) => e.getAttribute('href')))
   expect(new Set(hrefs)).toEqual(new Set(projects.map((p) => p.repoUrl)))
 })
+
+test('loads a project detail page directly', async ({ page }) => {
+  await page.goto('/project/i-have-notions')
+
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('I Have Notions')
+})
+
+test('shows a not-found state for an unknown project', async ({ page }) => {
+  await page.goto('/projects/does-not-exist')
+
+  await expect(page.getByText(/not found/i)).toBeVisible()
+})
