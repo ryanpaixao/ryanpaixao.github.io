@@ -25,8 +25,10 @@ const props = withDefaults(
   },
 )
 
-const isExternal = computed(() => isExternalLink(props.to.toString()))
-const opensNewTab = computed(() => shouldOpenNewTab(props.to.toString(), isExternal.value))
+const isExternal = computed(() => !!props.to && isExternalLink(props.to.toString()))
+const opensNewTab = computed(
+  () => props.to && shouldOpenNewTab(props.to.toString(), isExternal.value),
+)
 </script>
 
 <template>

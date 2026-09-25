@@ -18,7 +18,7 @@ test.describe('home page', () => {
 
     await expect(firstCard.getByRole('link', { name: 'I Have Notions' })).toHaveAttribute(
       'href',
-      /\/project\/i-have-notions/,
+      /\/projects\/i-have-notions/,
     )
   })
 })
@@ -35,9 +35,9 @@ test('every project links to a real repository', async ({ page }) => {
 })
 
 test('loads a project detail page directly', async ({ page }) => {
-  await page.goto('/project/i-have-notions')
+  await page.goto('/projects/i-have-notions')
 
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('I Have Notions')
+  await expect(page.getByRole('heading', { level: 2 })).toHaveText('I Have Notions')
 })
 
 test('shows a not-found state for an unknown project', async ({ page }) => {

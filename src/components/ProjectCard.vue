@@ -8,13 +8,12 @@ interface Props {
 
 const props = defineProps<Props>()
 const { approach, date, problem, repoUrl, retrospective, slug, summary, title } = props.projectInfo
-const projectPath = `/projects/${slug}`
 </script>
 
 <template>
   <article>
     <h2>
-      <AppLink :to="projectPath">
+      <AppLink :to="`/projects/${slug}`">
         {{ title }}
       </AppLink>
     </h2>
