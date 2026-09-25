@@ -1,4 +1,8 @@
 {
-  "extends": "@tsconfig/node24/tsconfig.json",
-  "include": ["./**/*"]
+  "extends": "../tsconfig.app.json",
+  "include": ["./**/*"],
+  "compilerOptions": {
+    "types": ["@playwright/test"],
+    "moduleResolution": "bundler"
+  }
 }

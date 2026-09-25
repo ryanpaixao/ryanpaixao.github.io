@@ -57,12 +57,17 @@ export default defineConfig({
         ...devices['Desktop Firefox'],
       },
     },
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
+    /* WebKit only on CI: its system deps aren't installable on the local (Fedora) host. */
+    ...(process.env.CI
+      ? [
+          {
+            name: 'webkit',
+            use: {
+              ...devices['Desktop Safari'],
+            },
+          },
+        ]
+      : []),
 
     /* Test against mobile viewports. */
     // {
