@@ -25,7 +25,7 @@ export const projects = [
     tags: ['React', 'Vite', 'TypeScript'],
     repoUrl: 'https://github.com/ryanpaixao/productivity-dashboard-frontend',
     date: '2025-05',
-    featured: true,
+    featured: false,
   },
   {
     slug: 'local-deepseek',
@@ -49,7 +49,7 @@ export const projects = [
     tags: ['Python', 'Printify API', 'Automation'],
     repoUrl: 'https://github.com/ryanpaixao/printify-integration',
     date: '2026-06',
-    featured: false,
+    featured: true,
   },
   {
     slug: 'excel-lent-extruder',
