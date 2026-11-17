@@ -5,16 +5,18 @@ import UnderConstructionWelcome from './components/UnderConstructionWelcome.vue'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <UnderConstructionWelcome />
+  <div class="container">
+    <header class="header">
+      <div>
+        <UnderConstructionWelcome />
 
-      <MainNav />
-    </div>
-  </header>
-  <main>
-    <RouterView />
-  </main>
+        <MainNav />
+      </div>
+    </header>
+    <main class="body">
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <style scoped>
